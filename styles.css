@@ -100,19 +100,20 @@ body {
 .nav-links a:hover { color: var(--color-white); background: var(--color-border); }
 
 .nav-cta {
-  background: var(--color-accent);
-  color: var(--color-white) !important;
-  font-weight: 700 !important;
-  padding: var(--space-2) var(--space-5) !important;
+  background: transparent;
+  color: var(--color-text-2) !important;
+  font-weight: 500 !important;
+  padding: var(--space-2) var(--space-3) !important;
   border-radius: var(--radius-full) !important;
-  box-shadow: var(--glow-sm);
-  transition: background var(--dur-base) var(--ease-out), transform var(--dur-fast) var(--ease-out), box-shadow var(--dur-base) var(--ease-out) !important;
+  box-shadow: none;
+  transition: color var(--dur-base) var(--ease-out), background var(--dur-base) var(--ease-out) !important;
 }
 
 .nav-cta:hover {
-  background: var(--color-accent-light) !important;
-  transform: translateY(-1px);
-  box-shadow: var(--glow) !important;
+  color: var(--color-white) !important;
+  background: var(--color-border) !important;
+  transform: none;
+  box-shadow: none !important;
 }
 
 .menu-toggle {
@@ -160,12 +161,89 @@ body {
 /* ══════════════ HERO ══════════════ */
 #hero {
   position: relative;
-  min-height: 100vh;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 140px var(--space-6) var(--space-20);
+  flex-direction: column;
+  align-items: stretch;
   overflow: hidden;
+  padding-top: 0;
+}
+
+/* ── Cabecera imagen — ancho del nav, debajo de él ── */
+.hero-cover {
+  position: relative;
+  width: calc(100% - var(--space-8));
+  max-width: 1100px;   /* mismo max-width que el nav pill */
+  margin: 108px auto 0; /* 108px = altura nav fijo; centrado horizontal */
+  height: clamp(200px, 32vw, 480px);
+  overflow: hidden;
+  flex-shrink: 0;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow);
+}
+
+.hero-cover-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  display: block;
+  /* Ken Burns suave */
+  animation: coverZoom 14s ease-in-out infinite alternate;
+}
+
+@keyframes coverZoom {
+  from { transform: scale(1);   }
+  to   { transform: scale(1.06); }
+}
+
+/* Degradado inferior para fusionar con el fondo oscuro */
+.hero-cover-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    oklch(13% 0.04 255 / 0) 55%,
+    oklch(13% 0.04 255 / 0.35) 80%,
+    oklch(13% 0.04 255 / 0.65) 100%
+  );
+  pointer-events: none;
+}
+
+/* ── Contenido debajo de la imagen ── */
+.hero-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: var(--space-12) var(--space-6) var(--space-20);
+  max-width: 800px;
+  margin: 0 auto;
+  width: 100%;
+  overflow-wrap: anywhere;
+  min-width: 0;
+}
+
+/* ── Animaciones escalonadas hero ── */
+.hero-anim {
+  opacity: 0;
+  transform: translateY(28px);
+  animation: heroFadeUp 0.7s var(--ease-out) forwards;
+  animation-delay: var(--anim-delay, 0s);
+}
+
+@keyframes heroFadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-anim { animation: none; opacity: 1; transform: none; }
+  .hero-cover-img { animation: none; }
 }
 
 /* Gradient mesh background */
@@ -200,14 +278,7 @@ body {
   100% { opacity: 1; }
 }
 
-.hero-content {
-  position: relative;
-  z-index: 1;
-  text-align: center;
-  max-width: 820px;
-  overflow-wrap: anywhere;
-  min-width: 0;
-}
+/* hero-content — definido arriba (cabecera imagen) */
 
 .hero-badge {
   display: inline-flex;

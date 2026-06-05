@@ -173,7 +173,7 @@ body {
   position: relative;
   width: calc(100% - var(--space-8));
   max-width: 1100px;   /* mismo max-width que el nav pill */
-  margin: 108px auto 0; /* 108px = altura nav fijo; centrado horizontal */
+  margin: 128px auto 0; /* offset nav fijo + margen extra */
   height: clamp(200px, 32vw, 480px);
   overflow: hidden;
   flex-shrink: 0;
@@ -188,13 +188,12 @@ body {
   object-fit: cover;
   object-position: center center;
   display: block;
-  /* Ken Burns suave */
-  animation: coverZoom 14s ease-in-out infinite alternate;
+  animation: coverSlide 18s ease-in-out infinite alternate;
 }
 
-@keyframes coverZoom {
-  from { transform: scale(1);   }
-  to   { transform: scale(1.06); }
+@keyframes coverSlide {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-4%); }
 }
 
 /* Degradado inferior para fusionar con el fondo oscuro */
@@ -1052,28 +1051,28 @@ footer {
 /* Posicionamiento global */
 #chatbot {
   position: fixed;
-  bottom: 100px; /* sobre el botón de WhatsApp */
-  right: var(--space-6);
+  bottom: 24px;
+  right: 24px;
   z-index: 2000;
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
   align-items: flex-end;
   gap: var(--space-3);
 }
 
 /* ── Botón toggle ── */
 .chat-toggle {
-  width: 56px;
-  height: 56px;
+  width: 72px;
+  height: 72px;
   border-radius: 50%;
-  background: var(--color-accent);
+  background: transparent;
   border: none;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 24px oklch(52% 0.19 255 / 0.45);
-  transition: transform var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out);
+  box-shadow: none;
+  transition: transform var(--dur-base) var(--ease-out);
   color: #fff;
   position: relative;
   flex-shrink: 0;
@@ -1084,7 +1083,7 @@ footer {
   box-shadow: 0 6px 32px oklch(52% 0.19 255 / 0.6);
 }
 
-.chat-icon-open  { display: block; }
+.chat-icon-open  { display: block; width: 72px; height: 72px; object-fit: contain; }
 .chat-icon-close { display: none; }
 
 #chatbot.open .chat-icon-open  { display: none; }
@@ -1093,18 +1092,12 @@ footer {
 /* Notificación badge */
 .chat-badge {
   position: absolute;
-  top: -4px;
-  right: -4px;
+  top: -2px;
+  right: -2px;
   width: 18px;
   height: 18px;
   border-radius: 50%;
   background: oklch(60% 0.22 25);
-  color: #fff;
-  font-size: 11px;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   border: 2px solid var(--color-bg);
   animation: pulseDot 2s ease-in-out infinite;
 }

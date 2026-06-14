@@ -407,7 +407,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
         }
       } catch (err) {
         hideTyping();
-        addBotMessage('⚠️ Problema de conexión. Escríbenos directamente.', true);
+        addBotMessage('Ahora mismo nuestro asistente está ocupado. Para atenderte de inmediato, continúa por WhatsApp con uno de nuestros agentes.', true);
       } finally {
         isWaiting = false;
         sendBtn.disabled = false;

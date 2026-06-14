@@ -126,6 +126,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     bubble.className = 'chat-bubble';
     bubble.innerHTML = text
       .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\[([^\]]+)\]\((https?:\/\/[^\)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" style="color:#4da6ff;text-decoration:underline;">$1</a>')
       .replace(/\n/g, '<br>');
     wrap.appendChild(bubble);
     if (showWA) wrap.appendChild(buildWABtn());

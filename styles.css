@@ -209,6 +209,39 @@ body {
   pointer-events: none;
 }
 
+/* ── Halo de luz — barrido diagonal sobre el banner ── */
+.hero-cover::after {
+  content: '';
+  position: absolute;
+  top: -20%;
+  bottom: -20%;
+  left: 0;
+  width: 45%;
+  transform: skewX(-18deg) translateX(-160%);
+  background: linear-gradient(
+    90deg,
+    oklch(75% 0.12 255 / 0) 0%,
+    oklch(85% 0.10 255 / 0.28) 50%,
+    oklch(75% 0.12 255 / 0) 100%
+  );
+  filter: blur(4px);
+  mix-blend-mode: screen;
+  pointer-events: none;
+  z-index: 3;
+  animation: heroSweep 6.5s ease-in-out infinite;
+}
+
+@keyframes heroSweep {
+  0%   { transform: skewX(-18deg) translateX(-160%); opacity: 0; }
+  12%  { opacity: 1; }
+  38%  { transform: skewX(-18deg) translateX(320%); opacity: 0; }
+  100% { transform: skewX(-18deg) translateX(320%); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-cover::after { animation: none; opacity: 0; }
+}
+
 /* ── Contenido debajo de la imagen ── */
 .hero-content {
   position: relative;

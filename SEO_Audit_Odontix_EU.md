@@ -110,6 +110,10 @@ El home tiene `FAQPage` schema con 4 preguntas genéricas. Las páginas de servi
 
 Ninguna página declara `BreadcrumbList`. En un sitio con 4 páginas de contenido y arquitectura plana, el impacto es menor que en un sitio grande, pero ayuda a que Google muestre la ruta en el SERP y refuerza la relación jerárquica home → servicio. Impacto: **Baja**. Esfuerzo: 30 minutos.
 
+### 6bis. Meta description de la home demasiado larga (Media)
+
+Verificado con herramienta externa (Detailed x ahrefs) sobre el sitio en producción: la meta description de la home tenía 162 caracteres, por encima del límite práctico de ~155-160 que Google suele respetar antes de truncar el snippet en el SERP. Las 3 landing pages de servicio estaban correctamente dentro de rango (145-146 caracteres). **Corregido en esta revisión** — se acortó a 148 caracteres conservando la keyword principal y la propuesta de valor.
+
 ### 7bis. Placeholders sin rellenar en páginas legales (Crítico)
 
 `aviso-legal.html` y `politica-de-privacidad.html` contienen datos de la empresa sin sustituir: `[RAZÓN SOCIAL]`, `[NIF/CIF]` y `[CALLE, NÚMERO, CIUDAD, CÓDIGO POSTAL, PAÍS]` aparecen literalmente en el HTML publicado, resaltados incluso con una clase `.placeholder` en amarillo. Es el mismo tipo de error que los placeholders `TU_NUMERO`/`TU_ENLACE` detectados en junio, pero esta vez en contenido legal obligatorio.

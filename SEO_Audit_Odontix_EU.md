@@ -65,7 +65,20 @@ Lo que **no** se corrigió automáticamente por requerir datos reales o activos 
 
 Impacto: **Crítico**. Esfuerzo: 20 minutos de edición + configuración de redirección en el hosting/DNS.
 
-### 2. Imágenes sin optimizar (Alto — Core Web Vitals)
+### 2. Imágenes sin optimizar (Alto — Core Web Vitals) — ✅ Corregido en esta revisión
+
+Todas las imágenes pesadas se convirtieron a WebP y se redimensionaron a su tamaño real de renderizado:
+
+| Archivo | Antes | Después | Reducción |
+|---|---|---|---|
+| `Tomas.png` → `Tomas.webp` | 5,2 MB | 84 KB | −98,4% |
+| `Wernher.png` → `Wernher.webp` | 3,7 MB | 68 KB | −98,2% |
+| `paraodontix..png` → `paraodontix.webp` | 2,2 MB | 140 KB | −93,6% |
+| `iconochatbot.png` → `iconochatbot.webp` | 1,5 MB | 12 KB | −99,2% |
+
+Peso total de imágenes: de ~12,4 MB a ~304 KB. Se añadieron atributos `width`/`height` explícitos en las 4 etiquetas `<img>` para evitar Cumulative Layout Shift (CLS), y se verificó visualmente con captura de pantalla que el hero, las fotos de equipo y el icono del chatbot renderizan correctamente. `logo.png` (40 KB) se dejó sin cambios por ser ya ligero y usarse también como `og:image`/Schema, donde PNG tiene compatibilidad universal.
+
+**Detalle original del hallazgo (para referencia):**
 
 | Archivo | Peso | Uso | Lazy-load |
 |---|---|---|---|
